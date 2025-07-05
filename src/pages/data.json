@@ -1,0 +1,22 @@
+[
+    {
+        "first_name": "Mouatsam",
+        "last_name": "Berrefas",
+        "department": "l1",
+        "position": "kjkljjl",
+        "phone": "0677884430",
+        "email": "",
+        "notes": "",
+        "skills": [
+            "تصميم"
+        ],
+        "social": {
+            "twitter": "hjhjj",
+            "linkedin": "",
+            "github": ""
+        },
+        "image": "img_685d5fd359490.jpg",
+        "qr_code": "qr_685d5fd359803.png",
+        "created_at": "2025-06-26 16:57:23"
+    }
+]
