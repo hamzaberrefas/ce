@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/favicon.png">
-    <title>Club Entreprenariat USTO-MB</title>
+    <title>Categorie</title>
     <style>
         /* General Reset */
         * {
@@ -236,25 +236,6 @@
             /* 🔥 Darker hover link */
         }
 
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ADADAE;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            resize: vertical;
-            /* Autoriser l’utilisateur à agrandir */
-            min-height: 120px;
-            /* Hauteur de base */
-        }
-
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0, 89, 255, 0.2);
-        }
-
-
         /* 🎨 Custom style for specific form titles */
         .form-group label[for="fullname"],
         .form-group label[for="dob"],
@@ -263,7 +244,6 @@
         .form-group label[for="rc"],
         .form-group label[for="activity"],
         .form-group label[for="activityCode"],
-        .form-group label[for="story"],
         .form-group label:not([for])
 
         /* For Domaines d’Expertise without "for" */
@@ -314,105 +294,23 @@
 
 
         <div class="form">
-            <h3 class="form-title">Formulaire de fournisseur</h3>
-            <p class="form-subtitle">Formulaire d'Adhésion au Club d'entrepreneuriat</p>
+            <h3 class="form-title">Formulaire d’inscription</h3>
+            <p class="form-subtitle">Rejoignez une communauté qui transforme des idées en projets. Qui êtes-vous ?</p>
 
-            <div class="form-group">
-                <label for="fullname">Nom et prénom<span class="required">*</span></label>
-                <input type="text" id="fullname" placeholder="Hamza Berrefas" />
-            </div>
-
-            <div class="form-group">
-                <label for="dob">Date de naissance<span class="required">*</span></label>
-                <input type="date" id="dob" name="dob" />
-            </div>
-
-            <div class="form-group">
-                <label for="story">Écrivez votre histoire<span class="required">*</span></label>
-                <textarea id="story"
-                    placeholder="Partagez votre parcours, vos expériences, ou tout ce que vous souhaitez..."></textarea>
-            </div>
-
-
-            <div class="form-group">
-                <label for="category">Catégorie<span class="required">*</span></label>
-                <select id="category" name="category" class="styled-select">
-                    <option value="" disabled selected>Sélectionner</option>
-                    <option value="Agroalimentaire">Agroalimentaire</option>
-                    <option value="Agriculture et élevage">Agriculture et élevage</option>
-                    <option value="Apiculture">Apiculture</option>
-                    <option value="Aquaculture et pêche">Aquaculture et pêche</option>
-                    <option value="Articles de sport et loisirs">Articles de sport et loisirs</option>
-                    <option value="Artisanat traditionnel">Artisanat traditionnel</option>
-                    <option value="Automobile et pièces détachées">Automobile et pièces détachées</option>
-                    <option value="Bâtiment et travaux publics (BTP)">Bâtiment et travaux publics (BTP)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Domaines d’Expertise<span class="required">*</span></label>
-                <div class="checkbox-group-expertise">
-                    <label class="checkbox-item-expertise" for="expertise1">
-                        <input type="checkbox" id="expertise1" name="expertise[]" value="Innovation & Entrepreneuriat">
-                        Innovation & Entrepreneuriat
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise2">
-                        <input type="checkbox" id="expertise2" name="expertise[]" value="Recherche Scientifique">
-                        Recherche Scientifique
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise3">
-                        <input type="checkbox" id="expertise3" name="expertise[]" value="Technologie & Ingénierie">
-                        Technologie & Ingénierie
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise4">
-                        <input type="checkbox" id="expertise4" name="expertise[]"
-                            value="Organisation d’Événements & Ateliers">
-                        Organisation d’Événements & Ateliers
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise5">
-                        <input type="checkbox" id="expertise5" name="expertise[]" value="Marketing & Réseaux Sociaux">
-                        Marketing & Réseaux Sociaux
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="company">Nom de l’entreprise<span class="required">*</span></label>
-                <input type="text" id="company" placeholder="RIWAM Service" />
-            </div>
-
-            <div class="form-group">
-                <label for="rc">Numéro de Registre de Commerce (RC)<span class="required">*</span></label>
-                <input type="text" id="rc" placeholder="12 B 10054460 - 16/00" />
-            </div>
-
-            <div class="form-group">
-                <label for="activity">Activité principale<span class="required">*</span></label>
-                <input type="text" id="activity" placeholder="Commerce Electronique" />
-            </div>
-
-            <div class="form-group">
-                <label for="activityCode">Code d'Activité principale<span class="required">*</span></label>
-                <input type="text" id="activityCode" placeholder="1234" />
-            </div>
-
-            <div class="form-group">
-                <div class="checkbox-group-terms">
-                    <label class="checkbox-item-terms" for="terms">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        En soumettant ce formulaire, vous acceptez nos
-                        <a href="#" target="_blank">Conditions générales</a> et
-                        <a href="#" target="_blank">politique de confidentialité</a>.
-                    </label>
-                </div>
-            </div>
-
-            <button class="btn" onclick="window.location.href='https://riwam.com/'">
-                je suis un fournisseur
+            <button class="btn" onclick="window.location.href='etudiant.html'">
+                Je suis un Étudiant
             </button>
-        </div>
-    </div>
 
+            <button class="btn" onclick="window.location.href='membre-cde.html'">
+                Je suis un Membre CDE
+            </button>
+
+            <button class="btn" onclick="window.location.href='incube.html'">
+                Je suis un Incubé
+            </button>
+        </div>  
+    </div>
+    
 </body>
 
 </html>

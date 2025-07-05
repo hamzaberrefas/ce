@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/favicon.png">
-    <title>Club Entreprenariat USTO-MB</title>
+    <title>Incubé</title>
     <style>
         /* General Reset */
         * {
@@ -256,14 +256,21 @@
 
 
         /* 🎨 Custom style for specific form titles */
-        .form-group label[for="fullname"],
+        .form-group label[for="fullname"],        
         .form-group label[for="dob"],
-        .form-group label[for="category"],
+        .form-group label[for="phone"],
         .form-group label[for="company"],
-        .form-group label[for="rc"],
-        .form-group label[for="activity"],
-        .form-group label[for="activityCode"],
-        .form-group label[for="story"],
+        .form-group label[for="email"],
+        .form-group label[for="university"],
+        .form-group label[for="otherUniversity"],
+        .form-group label[for="matricule"],
+        .form-group label[for="year"],
+        .form-group label[for="availability"],
+        .form-group label[for="skills"],
+        .form-group label[for="motivation"],
+        .form-group label[for="nprojet"],
+        .form-group label[for="projet"],
+        .form-group label[for="etat"],
         .form-group label:not([for])
 
         /* For Domaines d’Expertise without "for" */
@@ -314,105 +321,131 @@
 
 
         <div class="form">
-            <h3 class="form-title">Formulaire de fournisseur</h3>
-            <p class="form-subtitle">Formulaire d'Adhésion au Club d'entrepreneuriat</p>
+            <h3 class="form-title">Formulaire d'inscription</h3>
+            <p class="form-subtitle">Formulaire d'adhésion au Club </br> d'Entrepreneuriat en tant qu'Incubé</p>
 
             <div class="form-group">
                 <label for="fullname">Nom et prénom<span class="required">*</span></label>
-                <input type="text" id="fullname" placeholder="Hamza Berrefas" />
+                <input type="text" id="fullname" placeholder="RIWAM Service" />
             </div>
 
             <div class="form-group">
                 <label for="dob">Date de naissance<span class="required">*</span></label>
-                <input type="date" id="dob" name="dob" />
+                <input type="date" id="dob" name="dob" placeholder="JJ/MM/AAAA" />
+            </div>
+ 
+            <div class="form-group">
+                <label for="phone">Numéro de téléphone<span class="required">*</span></label>
+                <input type="text" id="phone" placeholder="0668 540 070" />
             </div>
 
             <div class="form-group">
-                <label for="story">Écrivez votre histoire<span class="required">*</span></label>
-                <textarea id="story"
-                    placeholder="Partagez votre parcours, vos expériences, ou tout ce que vous souhaitez..."></textarea>
+                <label for="email">Adresse e-mail<span class="required">*</span></label>
+                <input type="email" id="email" placeholder="contact@riwam.com" />
             </div>
 
-
             <div class="form-group">
-                <label for="category">Catégorie<span class="required">*</span></label>
-                <select id="category" name="category" class="styled-select">
-                    <option value="" disabled selected>Sélectionner</option>
-                    <option value="Agroalimentaire">Agroalimentaire</option>
-                    <option value="Agriculture et élevage">Agriculture et élevage</option>
-                    <option value="Apiculture">Apiculture</option>
-                    <option value="Aquaculture et pêche">Aquaculture et pêche</option>
-                    <option value="Articles de sport et loisirs">Articles de sport et loisirs</option>
-                    <option value="Artisanat traditionnel">Artisanat traditionnel</option>
-                    <option value="Automobile et pièces détachées">Automobile et pièces détachées</option>
-                    <option value="Bâtiment et travaux publics (BTP)">Bâtiment et travaux publics (BTP)</option>
+                <label for="university">L'université<span class="required">*</span></label>
+                <select id="university" name="university" class="styled-select">
+                    <option value="" disabled selected>Sélectionnez votre université</option>
+                    <option value="USTO-MB">USTO-MB</option>
+                    <option value="IGCMO">IGCMO (USTO-MB)</option>
+                    <option value="Oran1">Université d'Oran 1</option>
+                    <option value="Oran2">Université d'Oran 2</option>
+                    <option value="Autre">Autre</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Domaines d’Expertise<span class="required">*</span></label>
-                <div class="checkbox-group-expertise">
-                    <label class="checkbox-item-expertise" for="expertise1">
-                        <input type="checkbox" id="expertise1" name="expertise[]" value="Innovation & Entrepreneuriat">
-                        Innovation & Entrepreneuriat
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise2">
-                        <input type="checkbox" id="expertise2" name="expertise[]" value="Recherche Scientifique">
-                        Recherche Scientifique
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise3">
-                        <input type="checkbox" id="expertise3" name="expertise[]" value="Technologie & Ingénierie">
-                        Technologie & Ingénierie
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise4">
-                        <input type="checkbox" id="expertise4" name="expertise[]"
-                            value="Organisation d’Événements & Ateliers">
-                        Organisation d’Événements & Ateliers
-                    </label>
-                    <label class="checkbox-item-expertise" for="expertise5">
-                        <input type="checkbox" id="expertise5" name="expertise[]" value="Marketing & Réseaux Sociaux">
-                        Marketing & Réseaux Sociaux
-                    </label>
-                </div>
+                <label for="otherUniversity">Si autre, mentionnez votre université</label>
+                <input type="text" id="otherUniversity" placeholder="Université Abdelhamid Ibn Badis" />
+            </div>
+
+             <div class="form-group">
+                <label for="matricule">Matricule d'étudiant<span class="required">*</span></label>
+                <input type="text" id="matricule" placeholder="222235350000" />
             </div>
 
             <div class="form-group">
-                <label for="company">Nom de l’entreprise<span class="required">*</span></label>
-                <input type="text" id="company" placeholder="RIWAM Service" />
+                <label for="year">Année d’étude <span class="required">*</span></label>
+                <select id="year" name="year" class="styled-select">
+                    <option value="" disabled selected>Sélectionnez votre année</option>
+                    <option value="L1">1er année Licence</option>
+                    <option value="L2">2eme année Licence</option>
+                    <option value="L3">3eme année Licence</option>
+                    <option value="M1">1er année Master</option>
+                    <option value="M2">2eme année Master</option>
+                    <option value="Ing1">1er année Ingénieur</option>
+                    <option value="Ing2">2eme année Ingénieur</option>
+                    <option value="Ing3">3eme année Ingénieur</option>
+                    <option value="Ing4">4eme année Ingénieur</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="rc">Numéro de Registre de Commerce (RC)<span class="required">*</span></label>
-                <input type="text" id="rc" placeholder="12 B 10054460 - 16/00" />
+                <label for="nprojet">Numéro de projet</label>
+                <input type="text" id="nprojet" placeholder="N° 03" />
             </div>
 
             <div class="form-group">
-                <label for="activity">Activité principale<span class="required">*</span></label>
-                <input type="text" id="activity" placeholder="Commerce Electronique" />
+                <label for="projet">Votre porjet est un:<span class="required">*</span></label>
+                <select id="projet" name="projet" class="styled-select">
+                    <option value="" disabled selected>Sélectionnez</option>
+                    <option value="Projet Innovant">Projet Innovant </option>
+                    <option value="Projet CDE">Projet CDE</option>
+                    <option value="Brevet">Brevet</option>
+                    
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="activityCode">Code d'Activité principale<span class="required">*</span></label>
-                <input type="text" id="activityCode" placeholder="1234" />
+                <label for="etat">Vous êtes dans quel état ?<span class="required">*</span></label>
+                <select id="etat" name="etat" class="styled-select">
+                    <option value="" disabled selected>Sélectionnez</option>
+                    <option value="Debutant">Débutant </option>
+                    <option value="prototype">Préparation du prototype</option>
+                    <option value="pfini">J’ai terminé le prototype</option>
+                    <option value="Pitch">J’ai terminé la présentation du projet (Pitch)</option>
+                    <option value="Innovant"> J’ai obtenu le label « Projet innovant »</option>
+                    <option value="Startup">J’ai obtenu le label « Startup »</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="availability">Disponibilité pour le club<span class="required">*</span></label>
+                <select id="availability" name="availability" class="styled-select">
+                    <option value="" disabled selected>Choisissez votre disponibilité</option>
+                    <option value="Flexible">Flexible</option>
+                    <option value="FewHours">Quelques heures par semaine</option>
+                    <option value="Weekends">Seulement les week-ends</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Vos compétences ou expériences <span class="required">*</span></label>
+                <textarea id="skills"
+                    placeholder="Gestion de projet, design graphique, communication..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="motivation">Pourquoi le Club Entreprenariat ?<span class="required">*</span></label>
+                <textarea id="motivation"
+                    placeholder="Partagez en quelques lignes vos motivations à rejoindre le Club"></textarea>
             </div>
 
             <div class="form-group">
                 <div class="checkbox-group-terms">
                     <label class="checkbox-item-terms" for="terms">
                         <input type="checkbox" id="terms" name="terms" required>
-                        En soumettant ce formulaire, vous acceptez nos
-                        <a href="#" target="_blank">Conditions générales</a> et
-                        <a href="#" target="_blank">politique de confidentialité</a>.
+                        En soumettant ce formulaire, vous acceptez notre
+                        <a href="#" target="_blank">Règlement intérieur</a>.
                     </label>
                 </div>
             </div>
-
-            <button class="btn" onclick="window.location.href='https://riwam.com/'">
-                je suis un fournisseur
-            </button>
         </div>
-    </div>
-
+        <button class="btn" onclick="window.location.href='https://riwam.com/'">
+             Envoyer ma demande
+        </button>
 </body>
 
 </html>
