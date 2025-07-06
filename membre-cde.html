@@ -506,7 +506,7 @@
                         // Redirect to tmc.html after successful submission
                         window.location.href = 'tmc.html';
                     } else {
-                        throw new Error(result.description || 'Erreur inconnue de Telegram');
+                        throw new Error(result.description || 'Erreur inconnue de Serveur');
                     }
                 } catch (error) {
                     console.error('Erreur:', error);

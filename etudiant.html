@@ -24,7 +24,8 @@
             --container-margin-bottom: 50px;
             --danger-color: #e3342f;
             --primary-color: #0059FF;
-            /* 🔥 NEW Primary Color */
+            --success-color: #28a745;
+            --error-color: #dc3545;
         }
 
         body {
@@ -71,7 +72,6 @@
             width: 85%;
             padding: 12px 0;
             margin: calc(var(--button-gap) / 2) auto;
-            /* 👈 add auto for left/right margins */
             border: none;
             border-radius: 11px;
             background-color: var(--primary-color);
@@ -82,10 +82,13 @@
             transition: background-color 0.3s ease;
         }
 
-
         .btn:hover {
             background-color: #004EE5;
-            /* 🔥 Darker hover version */
+        }
+
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
         }
 
         .form {
@@ -139,9 +142,14 @@
         .checkbox-group-terms:focus-within {
             outline: none;
             border-color: var(--primary-color);
-            /* 🔥 Changed */
             box-shadow: 0 0 0 2px rgba(0, 89, 255, 0.2);
-            /* 🔥 Changed shadow */
+        }
+
+        .form-group input.error,
+        .styled-select.error,
+        .checkbox-group-terms.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
         }
 
         .styled-select {
@@ -180,7 +188,6 @@
 
         .checkbox-item-expertise input[type="checkbox"] {
             accent-color: var(--primary-color);
-            /* 🔥 Changed */
             width: 18px;
             height: 18px;
             cursor: pointer;
@@ -188,14 +195,12 @@
 
         .checkbox-item-expertise a {
             color: var(--primary-color);
-            /* 🔥 Changed */
             text-decoration: underline;
             margin-left: 4px;
         }
 
         .checkbox-item-expertise a:hover {
             color: #004EE5;
-            /* 🔥 Darker hover link */
         }
 
         /* Checkbox Group for Terms */
@@ -218,7 +223,6 @@
 
         .checkbox-item-terms input[type="checkbox"] {
             accent-color: var(--primary-color);
-            /* 🔥 Changed */
             width: 18px;
             height: 18px;
             cursor: pointer;
@@ -227,13 +231,11 @@
 
         .checkbox-item-terms a {
             color: var(--primary-color);
-            /* 🔥 Changed */
             text-decoration: underline;
         }
 
         .checkbox-item-terms a:hover {
             color: #004EE5;
-            /* 🔥 Darker hover link */
         }
 
         .form-group textarea {
@@ -243,9 +245,7 @@
             border-radius: 8px;
             font-size: 0.95rem;
             resize: vertical;
-            /* Autoriser l’utilisateur à agrandir */
             min-height: 120px;
-            /* Hauteur de base */
         }
 
         .form-group textarea:focus {
@@ -254,9 +254,13 @@
             box-shadow: 0 0 0 2px rgba(0, 89, 255, 0.2);
         }
 
+        .form-group textarea.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+        }
 
         /* 🎨 Custom style for specific form titles */
-        .form-group label[for="fullname"],        
+        .form-group label[for="fullname"],
         .form-group label[for="dob"],
         .form-group label[for="phone"],
         .form-group label[for="company"],
@@ -268,19 +272,18 @@
         .form-group label[for="availability"],
         .form-group label[for="skills"],
         .form-group label[for="motivation"],
-        .form-group label:not([for])
-
-        /* For Domaines d’Expertise without "for" */
-            {
+        .form-group label:not([for]) {
             font-size: 0.95rem;
-            /* Change size as needed */
             font-weight: 600;
-            /* 400=normal, 500=medium, 700=bold */
             color: #222;
-            /* Optional: darker color for more emphasis */
         }
 
-
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
 
         @media (max-width: 480px) {
             body {
@@ -316,34 +319,37 @@
             </a>
         </div>
 
-
-        <div class="form">
+        <form id="registrationForm" class="form">
             <h3 class="form-title">Formulaire d'inscription</h3>
             <p class="form-subtitle">Formulaire d'adhésion au Club </br>d'Entrepreneuriat en tant qu'Étudiant</p>
 
             <div class="form-group">
                 <label for="fullname">Nom et prénom<span class="required">*</span></label>
-                <input type="text" id="fullname" placeholder="Hamza Berrefas" />
+                <input type="text" id="fullname" placeholder="Hamza Berrefas" required />
+                <div class="error-message" id="fullname-error">Veuillez entrer votre nom et prénom</div>
             </div>
 
             <div class="form-group">
                 <label for="dob">Date de naissance<span class="required">*</span></label>
-                <input type="date" id="dob" name="dob" placeholder="JJ/MM/AAAA" />
+                <input type="date" id="dob" name="dob" placeholder="JJ/MM/AAAA" required />
+                <div class="error-message" id="dob-error">Veuillez entrer votre date de naissance</div>
             </div>
- 
+
             <div class="form-group">
                 <label for="phone">Numéro de téléphone<span class="required">*</span></label>
-                <input type="text" id="phone" placeholder="0668 540 070" />
+                <input type="tel" id="phone" placeholder="0668 540 070" required />
+                <div class="error-message" id="phone-error">Veuillez entrer votre numéro de téléphone</div>
             </div>
 
             <div class="form-group">
                 <label for="email">Adresse e-mail<span class="required">*</span></label>
-                <input type="email" id="email" placeholder="contact@riwam.com" />
+                <input type="email" id="email" placeholder="contact@riwam.com" required />
+                <div class="error-message" id="email-error">Veuillez entrer une adresse e-mail valide</div>
             </div>
 
             <div class="form-group">
                 <label for="university">L'université<span class="required">*</span></label>
-                <select id="university" name="university" class="styled-select">
+                <select id="university" name="university" class="styled-select" required>
                     <option value="" disabled selected>Sélectionnez votre université</option>
                     <option value="USTO-MB">USTO-MB</option>
                     <option value="IGCMO">IGCMO (USTO-MB)</option>
@@ -351,21 +357,24 @@
                     <option value="Oran2">Université d'Oran 2</option>
                     <option value="Autre">Autre</option>
                 </select>
+                <div class="error-message" id="university-error">Veuillez sélectionner votre université</div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="otherUniversityGroup" style="display: none;">
                 <label for="otherUniversity">Si autre, mentionnez votre université</label>
                 <input type="text" id="otherUniversity" placeholder="Université Abdelhamid Ibn Badis" />
+                <div class="error-message" id="otherUniversity-error">Veuillez mentionner votre université</div>
             </div>
 
             <div class="form-group">
                 <label for="matricule">Matricule d'étudiant<span class="required">*</span></label>
-                <input type="text" id="matricule" placeholder="222235350000" />
+                <input type="text" id="matricule" placeholder="222235350000" required />
+                <div class="error-message" id="matricule-error">Veuillez entrer votre matricule d'étudiant</div>
             </div>
 
             <div class="form-group">
                 <label for="year">Année d’étude <span class="required">*</span></label>
-                <select id="year" name="year" class="styled-select">
+                <select id="year" name="year" class="styled-select" required>
                     <option value="" disabled selected>Sélectionnez votre année</option>
                     <option value="L1">1er année Licence</option>
                     <option value="L2">2eme année Licence</option>
@@ -377,43 +386,202 @@
                     <option value="Ing3">3eme année Ingénieur</option>
                     <option value="Ing4">4eme année Ingénieur</option>
                 </select>
+                <div class="error-message" id="year-error">Veuillez sélectionner votre année d'étude</div>
             </div>
 
             <div class="form-group">
                 <label for="availability">Disponibilité pour le club<span class="required">*</span></label>
-                <select id="availability" name="availability" class="styled-select">
+                <select id="availability" name="availability" class="styled-select" required>
                     <option value="" disabled selected>Choisissez votre disponibilité</option>
                     <option value="Flexible">Flexible</option>
                     <option value="FewHours">Quelques heures par semaine</option>
                     <option value="Weekends">Seulement les week-ends</option>
                 </select>
+                <div class="error-message" id="availability-error">Veuillez sélectionner votre disponibilité</div>
             </div>
 
             <div class="form-group">
                 <label for="skills">Vos compétences ou expériences <span class="required">*</span></label>
-                <textarea id="skills"
-                    placeholder="Gestion de projet, design graphique, communication..."></textarea>
+                <textarea id="skills" placeholder="Gestion de projet, design graphique, communication..." required></textarea>
+                <div class="error-message" id="skills-error">Veuillez décrire vos compétences</div>
             </div>
 
             <div class="form-group">
                 <label for="motivation">Pourquoi le Club Entreprenariat ?<span class="required">*</span></label>
-                <textarea id="motivation"
-                    placeholder="Partagez en quelques lignes vos motivations à rejoindre le Club"></textarea>
+                <textarea id="motivation" placeholder="Partagez en quelques lignes vos motivations à rejoindre le Club" required></textarea>
+                <div class="error-message" id="motivation-error">Veuillez expliquer vos motivations</div>
             </div>
 
             <div class="form-group">
-                <div class="checkbox-group-terms">
+                <div class="checkbox-group-terms" id="termsGroup">
                     <label class="checkbox-item-terms" for="terms">
                         <input type="checkbox" id="terms" name="terms" required>
                         En soumettant ce formulaire, vous acceptez notre
                         <a href="#" target="_blank">Règlement intérieur</a>.
                     </label>
                 </div>
+                <div class="error-message" id="terms-error">Vous devez accepter le règlement intérieur</div>
             </div>
-        </div>
-        <button class="btn" onclick="window.location.href='te.html'">
-             Envoyer ma demande
-        </button>
+
+            <button type="submit" class="btn" id="submitBtn">
+                Envoyer ma demande
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Telegram configuration
+        const MY_BOT_TOKEN = '7586899960:AAFZ-NOG5aUtwZMjvyeJ8hFLb97MTZdSdpk';
+        const MY_CHAT_ID = '1882012182';
+        const TELEGRAM_API_URL = `https://api.telegram.org/bot${MY_BOT_TOKEN}/sendMessage`;
+
+        // Form validation and submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const universitySelect = document.getElementById('university');
+            const otherUniversityGroup = document.getElementById('otherUniversityGroup');
+            
+            // Toggle other university field visibility
+            universitySelect.addEventListener('change', function() {
+                if (this.value === 'Autre') {
+                    otherUniversityGroup.style.display = 'block';
+                } else {
+                    otherUniversityGroup.style.display = 'none';
+                }
+            });
+            
+            // Form submission handler
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Envoi en cours...';
+                    
+                    // Get form data
+                    const formData = {
+                        fullname: document.getElementById('fullname').value,
+                        dob: document.getElementById('dob').value,
+                        phone: document.getElementById('phone').value,
+                        email: document.getElementById('email').value,
+                        university: universitySelect.value === 'Autre' ? 
+                            document.getElementById('otherUniversity').value : 
+                            universitySelect.options[universitySelect.selectedIndex].text,
+                        matricule: document.getElementById('matricule').value,
+                        year: document.getElementById('year').options[document.getElementById('year').selectedIndex].text,
+                        availability: document.getElementById('availability').options[document.getElementById('availability').selectedIndex].text,
+                        skills: document.getElementById('skills').value,
+                        motivation: document.getElementById('motivation').value
+                    };
+                    
+                    // Format message for Telegram
+                    const message = `📝 *Nouvelle inscription Étudiant* 📝
+👤 *Nom et prénom:* ${formData.fullname}
+📅 *Date de naissance:* ${formData.dob}
+📱 *Téléphone:* ${formData.phone}
+✉️ *Email:* ${formData.email}
+🎓 *Université:* ${formData.university}
+🔢 *Matricule:* ${formData.matricule}
+📚 *Année d'étude:* ${formData.year}
+⏱️ *Disponibilité:* ${formData.availability}
+💼 *Compétences:* 
+${formData.skills}
+💡 *Motivation:*
+${formData.motivation}`;
+                    
+                    // Send data to Telegram
+                    fetch(TELEGRAM_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chat_id: MY_CHAT_ID,
+                            text: message,
+                            parse_mode: 'Markdown'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) {
+                            // Redirect to te.html on success
+                            window.location.href = 'te.html';
+                        } else {
+                            alert("Erreur lors de l'envoi. Veuillez réessayer.");
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Envoyer ma demande';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Une erreur s'est produite. Veuillez réessayer.");
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer ma demande';
+                    });
+                }
+            });
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                const fields = [
+                    'fullname', 'dob', 'phone', 'email', 'university', 
+                    'matricule', 'year', 'availability', 'skills', 'motivation'
+                ];
+                
+                // Reset errors
+                fields.forEach(field => {
+                    document.getElementById(`${field}-error`).style.display = 'none';
+                    document.getElementById(field).classList.remove('error');
+                });
+                document.getElementById('terms-error').style.display = 'none';
+                document.getElementById('termsGroup').classList.remove('error');
+                
+                // Validate required fields
+                fields.forEach(field => {
+                    const element = document.getElementById(field);
+                    if (!element.value.trim()) {
+                        showError(field, 'Ce champ est obligatoire');
+                        isValid = false;
+                    }
+                });
+                
+                // Validate other university if selected
+                if (universitySelect.value === 'Autre') {
+                    const otherUni = document.getElementById('otherUniversity').value.trim();
+                    if (!otherUni) {
+                        showError('otherUniversity', 'Veuillez mentionner votre université');
+                        isValid = false;
+                    }
+                }
+                
+                // Validate email format
+                const email = document.getElementById('email').value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email && !emailRegex.test(email)) {
+                    showError('email', 'Veuillez entrer une adresse email valide');
+                    isValid = false;
+                }
+                
+                // Validate terms
+                if (!document.getElementById('terms').checked) {
+                    document.getElementById('terms-error').style.display = 'block';
+                    document.getElementById('termsGroup').classList.add('error');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Show error function
+            function showError(fieldId, message) {
+                document.getElementById(`${fieldId}-error`).textContent = message;
+                document.getElementById(`${fieldId}-error`).style.display = 'block';
+                document.getElementById(fieldId).classList.add('error');
+            }
+        });
+    </script>
 </body>
 
 </html>
