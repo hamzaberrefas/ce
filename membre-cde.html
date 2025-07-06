@@ -284,7 +284,22 @@
             /* Optional: darker color for more emphasis */
         }
 
+        /* New loading spinner style */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
 
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
         @media (max-width: 480px) {
             body {
@@ -320,34 +335,33 @@
             </a>
         </div>
 
-
-        <div class="form">
+        <form id="cde-form" class="form">
             <h3 class="form-title">Formulaire d'inscription</h3>
             <p class="form-subtitle">Formulaire d'adhésion au Club </br>d'Entrepreneuriat en tant que Membre CDE</p>
 
             <div class="form-group">
                 <label for="fullname">Nom et prénom<span class="required">*</span></label>
-                <input type="text" id="fullname" placeholder="RIWAM Service" />
+                <input type="text" id="fullname" name="fullname" placeholder="RIWAM Service" required />
             </div>
 
             <div class="form-group">
                 <label for="dob">Date de naissance<span class="required">*</span></label>
-                <input type="date" id="dob" name="dob" placeholder="JJ/MM/AAAA" />
+                <input type="date" id="dob" name="dob" placeholder="JJ/MM/AAAA" required />
             </div>
 
             <div class="form-group">
                 <label for="phone">Numéro de téléphone<span class="required">*</span></label>
-                <input type="text" id="phone" placeholder="0668 540 070" />
+                <input type="text" id="phone" name="phone" placeholder="0668 540 070" required />
             </div>
 
             <div class="form-group">
                 <label for="email">Adresse e-mail<span class="required">*</span></label>
-                <input type="email" id="email" placeholder="contact@riwam.com" />
+                <input type="email" id="email" name="email" placeholder="contact@riwam.com" required />
             </div>
 
             <div class="form-group">
                 <label for="university">L'université d'étude<span class="required">*</span></label>
-                <select id="university" name="university" class="styled-select">
+                <select id="university" name="university" class="styled-select" required>
                     <option value="" disabled selected>Sélectionnez votre université</option>
                     <option value="USTO-MB">USTO-MB</option>
                     <option value="IGCMO">IGCMO (USTO-MB)</option>
@@ -359,12 +373,12 @@
 
             <div class="form-group">
                 <label for="otherUniversity">Si autre, mentionnez votre université</label>
-                <input type="text" id="otherUniversity" placeholder="Université Abdelhamid Ibn Badis" />
+                <input type="text" id="otherUniversity" name="otherUniversity" placeholder="Université Abdelhamid Ibn Badis" />
             </div>
 
             <div class="form-group">
                 <label for="univeau">Votre niveau universitaire <span class="required">*</span></label>
-                <select id="univeau" name="univeau" class="styled-select">
+                <select id="univeau" name="univeau" class="styled-select" required>
                     <option value="" disabled selected>Sélectionnez niveau</option>
                     <option value="L1">BAC +1</option>
                     <option value="L2">BAC +2</option>
@@ -375,8 +389,8 @@
             </div>
 
             <div class="form-group">
-                <label for="univeau">vous avez bénéficié de la formation CDE de <span class="required">*</span></label>
-                <select id="univeau" name="univeau" class="styled-select">
+                <label for="session">vous avez bénéficié de la formation CDE de <span class="required">*</span></label>
+                <select id="session" name="session" class="styled-select" required>
                     <option value="" disabled selected>Sélectionnez niveau</option>
                     <option value="sjuin2024">la session juin 2024</option>
                     <option value="sjuillet2024">la session juillet 2024</option>
@@ -396,7 +410,7 @@
 
             <div class="form-group">
                 <label for="availability">Disponibilité pour le club<span class="required">*</span></label>
-                <select id="availability" name="availability" class="styled-select">
+                <select id="availability" name="availability" class="styled-select" required>
                     <option value="" disabled selected>Choisissez votre disponibilité</option>
                     <option value="Flexible">Flexible</option>
                     <option value="FewHours">Quelques heures par semaine</option>
@@ -406,13 +420,13 @@
 
             <div class="form-group">
                 <label for="skills">Vos compétences ou expériences <span class="required">*</span></label>
-                <textarea id="skills" placeholder="Gestion de projet, design graphique, communication..."></textarea>
+                <textarea id="skills" name="skills" placeholder="Gestion de projet, design graphique, communication..." required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="motivation">Pourquoi le Club Entreprenariat ?<span class="required">*</span></label>
-                <textarea id="motivation"
-                    placeholder="Partagez en quelques lignes vos motivations à rejoindre le Club"></textarea>
+                <textarea id="motivation" name="motivation"
+                    placeholder="Partagez en quelques lignes vos motivations à rejoindre le Club" required></textarea>
             </div>
 
             <div class="form-group">
@@ -424,10 +438,88 @@
                     </label>
                 </div>
             </div>
-        </div>
-        <button class="btn" onclick="window.location.href='tmc.html'">
-            Envoyer ma demande
-        </button>
+            <button type="submit" class="btn" id="submit-btn">
+                <span id="btn-text">Envoyer ma demande</span>
+                <span id="btn-spinner" class="spinner" style="display:none;"></span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('cde-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnSpinner = document.getElementById('btn-spinner');
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                btnText.textContent = 'Envoi en cours...';
+                btnSpinner.style.display = 'inline-block';
+                
+                // Get form data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Handle university selection
+                if (data.university === 'Autre' && data.otherUniversity) {
+                    data.university = data.otherUniversity;
+                }
+                
+                // Format message for Telegram
+                let message = `📋 *Nouvelle inscription au CDE:*\n\n`;
+                message += `*Nom et prénom:* ${data.fullname || 'Non spécifié'}\n`;
+                message += `*Date de naissance:* ${data.dob || 'Non spécifié'}\n`;
+                message += `*Téléphone:* ${data.phone || 'Non spécifié'}\n`;
+                message += `*Email:* ${data.email || 'Non spécifié'}\n`;
+                message += `*Université:* ${data.university || 'Non spécifié'}\n`;
+                message += `*Niveau universitaire:* ${data.univeau || 'Non spécifié'}\n`;
+                message += `*Session de formation:* ${data.session || 'Non spécifié'}\n`;
+                message += `*Disponibilité:* ${data.availability || 'Non spécifié'}\n`;
+                message += `*Compétences:*\n${data.skills || 'Non spécifié'}\n\n`;
+                message += `*Motivation:*\n${data.motivation || 'Non spécifié'}`;
+                
+                // Telegram bot configuration
+                const BOT_TOKEN = '7586899960:AAFZ-NOG5aUtwZMjvyeJ8hFLb97MTZdSdpk';
+                const CHAT_ID = '1882012182';
+                
+                try {
+                    // Send to Telegram
+                    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chat_id: CHAT_ID,
+                            text: message,
+                            parse_mode: 'Markdown'
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.ok) {
+                        alert('Formulaire soumis avec succès! Nous vous contacterons bientôt.');
+                        form.reset();
+                    } else {
+                        throw new Error(result.description || 'Erreur inconnue de Telegram');
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert(`Erreur d'envoi: ${error.message}. Veuillez réessayer.`);
+                } finally {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Envoyer ma demande';
+                    btnSpinner.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
