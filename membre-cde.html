@@ -289,7 +289,7 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+            border: 3px solid rgba(255, 255, 255, .3);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
@@ -298,7 +298,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 480px) {
@@ -373,7 +375,8 @@
 
             <div class="form-group">
                 <label for="otherUniversity">Si autre, mentionnez votre université</label>
-                <input type="text" id="otherUniversity" name="otherUniversity" placeholder="Université Abdelhamid Ibn Badis" />
+                <input type="text" id="otherUniversity" name="otherUniversity"
+                    placeholder="Université Abdelhamid Ibn Badis" />
             </div>
 
             <div class="form-group">
@@ -420,7 +423,8 @@
 
             <div class="form-group">
                 <label for="skills">Vos compétences ou expériences <span class="required">*</span></label>
-                <textarea id="skills" name="skills" placeholder="Gestion de projet, design graphique, communication..." required></textarea>
+                <textarea id="skills" name="skills" placeholder="Gestion de projet, design graphique, communication..."
+                    required></textarea>
             </div>
 
             <div class="form-group">
@@ -446,29 +450,29 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('cde-form');
             const submitBtn = document.getElementById('submit-btn');
             const btnText = document.getElementById('btn-text');
             const btnSpinner = document.getElementById('btn-spinner');
-            
-            form.addEventListener('submit', async function(e) {
+
+            form.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                
+
                 // Show loading state
                 submitBtn.disabled = true;
                 btnText.textContent = 'Envoi en cours...';
                 btnSpinner.style.display = 'inline-block';
-                
+
                 // Get form data
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
-                
+
                 // Handle university selection
                 if (data.university === 'Autre' && data.otherUniversity) {
                     data.university = data.otherUniversity;
                 }
-                
+
                 // Format message for Telegram
                 let message = `📋 *Nouvelle inscription au CDE:*\n\n`;
                 message += `*Nom et prénom:* ${data.fullname || 'Non spécifié'}\n`;
@@ -481,11 +485,11 @@
                 message += `*Disponibilité:* ${data.availability || 'Non spécifié'}\n`;
                 message += `*Compétences:*\n${data.skills || 'Non spécifié'}\n\n`;
                 message += `*Motivation:*\n${data.motivation || 'Non spécifié'}`;
-                
+
                 // Telegram bot configuration
                 const BOT_TOKEN = '7586899960:AAFZ-NOG5aUtwZMjvyeJ8hFLb97MTZdSdpk';
                 const CHAT_ID = '1882012182';
-                
+
                 try {
                     // Send to Telegram
                     const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -499,10 +503,20 @@
                             parse_mode: 'Markdown'
                         })
                     });
-                    
+
                     const result = await response.json();
-                    
+
                     if (result.ok) {
+
+                        // Appel Google Sheets API
+                        await fetch('https://script.google.com/macros/s/AKfycbxq4sKqDLp1j3RCY3S4exRqLA-g4Bac4ZoZIsUT2-EyzOih4PJl2C4rxxLVdKbgIwG2/exec', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
                         // Redirect to tmc.html after successful submission
                         window.location.href = 'tmc.html';
                     } else {
@@ -511,7 +525,7 @@
                 } catch (error) {
                     console.error('Erreur:', error);
                     alert(`Erreur d'envoi: ${error.message}. Veuillez réessayer.`);
-                    
+
                     // Reset button state
                     submitBtn.disabled = false;
                     btnText.textContent = 'Envoyer ma demande';
