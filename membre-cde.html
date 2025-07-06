@@ -503,15 +503,15 @@
                     const result = await response.json();
                     
                     if (result.ok) {
-                        alert('Formulaire soumis avec succès! Nous vous contacterons bientôt.');
-                        form.reset();
+                        // Redirect to tmc.html after successful submission
+                        window.location.href = 'tmc.html';
                     } else {
                         throw new Error(result.description || 'Erreur inconnue de Telegram');
                     }
                 } catch (error) {
                     console.error('Erreur:', error);
                     alert(`Erreur d'envoi: ${error.message}. Veuillez réessayer.`);
-                } finally {
+                    
                     // Reset button state
                     submitBtn.disabled = false;
                     btnText.textContent = 'Envoyer ma demande';
