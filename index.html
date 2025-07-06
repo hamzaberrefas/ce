@@ -469,7 +469,7 @@
                                         <div class="col-lg-12">
                                             <div class="tmp-button-here">
                                                 <button class="tmp-btn hover-icon-reverse radius-round w-100"
-                                                    type="button" onclick="openModal()">
+                                                    type="submit">
                                                     <span class="icon-reverse-wrapper">
                                                         <span class="btn-text">Collaborer maintenant</span>
                                                         <span class="btn-icon"><i
@@ -760,15 +760,67 @@
     <!-- custom Js -->
     <script src="assets/js/main.js"></script>
     <script>
+        // Telegram integration script
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Format Telegram message
+            const telegramMessage = `📬 *Nouvelle collaboration!*\n\n` +
+                                   `*Nom:* ${name}\n` +
+                                   `*Téléphone:* ${phone}\n` +
+                                   `*Email:* ${email}\n` +
+                                   `*Sujet:* ${subject}\n` +
+                                   `*Message:*\n${message}`;
+            
+            // Telegram API configuration
+            const botToken = '7586899960:AAFZ-NOG5aUtwZMjvyeJ8hFLb97MTZdSdpk';
+            const chatId = '1882012182';
+            const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
+            // Send to Telegram
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: telegramMessage,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    // Show success modal and reset form
+                    openModal();
+                    document.getElementById('contact-form').reset();
+                } else {
+                    alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue. Veuillez réessayer plus tard.');
+            });
+        });
+        
+        // Existing modal functions
         function openModal() {
             document.getElementById("termsModal").style.display = "flex";
         }
+        
         function closeModal() {
             document.getElementById("termsModal").style.display = "none";
         }
     </script>
 
-
 </body>
-
 </html>
